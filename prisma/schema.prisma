@@ -1,0 +1,21 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Product {
+  id          Int     @id @default(autoincrement())
+  name        String
+  description String
+  price       Float
+  image       String?
+  category    String
+  quantity    Int
+  priority    Int      @default(3) // Ưu tiên mặc định là 3
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
