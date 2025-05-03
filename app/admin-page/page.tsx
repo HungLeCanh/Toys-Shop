@@ -50,7 +50,7 @@ export default function AdminPage() {
       setSelectedCategories([])
     }
   }, [form.category])
-  
+
   // Thông tin cửa hàng ở đây
   const shopName = process.env.NEXT_PUBLIC_SHOP_NAME;
   const facebookUrl = process.env.NEXT_PUBLIC_FACEBOOK_LINK;
@@ -235,6 +235,8 @@ export default function AdminPage() {
             src="/default-avatar.jpg" 
             alt="Logo cửa hàng" 
             className="w-full h-full object-cover"
+            width={300}
+            height={200}
             onError={(e) => {
               (e.target as HTMLImageElement).src = "https://via.placeholder.com/64";
             }}
@@ -449,6 +451,7 @@ export default function AdminPage() {
                       <Image
                         src={localImagePreview}
                         alt="Ảnh đã chọn"
+                        fill
                         className="w-full h-full object-cover"
                       />
                       <button
@@ -467,6 +470,7 @@ export default function AdminPage() {
                       <Image
                         src={form.image}
                         alt="Ảnh sản phẩm"
+                        fill
                         className="w-full h-full object-cover"
                       />
                       <button
@@ -574,6 +578,7 @@ export default function AdminPage() {
                   <Image
                     src={product.image || "https://via.placeholder.com/300x200?text=No+Image"}
                     alt={product.name}
+                    fill
                     className="w-full h-full object-cover"
                   />
                   {product.priority >= 3 && (
