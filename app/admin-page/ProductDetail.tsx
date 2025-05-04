@@ -3,19 +3,7 @@
 import { useState, useEffect } from "react"
 import { X, Edit, Trash2, UploadCloud } from "lucide-react"
 import Image from "next/image"
-
-type Product = {
-  id: number
-  name: string
-  description: string
-  price: number
-  image?: string
-  category: string
-  quantity: number
-  priority: number
-  createdAt?: string
-  updatedAt?: string
-}
+import { Product } from '../types/product';
 
 type ProductDetailProps = {
   product: Product
@@ -49,6 +37,10 @@ export default function ProductDetail({ product, onEditSuccess, onDeleteSuccess,
     if (editForm.price <= 0) errors.price = "Giá phải lớn hơn 0"
     if (editForm.quantity < 0) errors.quantity = "Số lượng không được âm"
     if (editForm.priority < 1 || editForm.priority > 5) errors.priority = "Ưu tiên phải từ 1-5"
+    if (editForm.discount != null && (editForm.discount < 0 || editForm.discount > 100)) {
+      errors.discount = "Giảm giá phải từ 0 đến 100 (%)"
+    }
+    
     
     setFormErrors(errors)
     return Object.keys(errors).length === 0
@@ -293,6 +285,29 @@ export default function ProductDetail({ product, onEditSuccess, onDeleteSuccess,
                   )}
                 </div>
 
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Giảm giá (%)
+                  </label>
+                  <input
+                    placeholder="Giảm giá (0-100)"
+                    type="number"
+                    min="0"
+                    max="100"
+                    value={editForm.discount ?? ""}
+                    onChange={e =>
+                      setEditForm({ ...editForm, discount: e.target.value === "" ? undefined : +e.target.value })
+                    }
+                    className={`w-full p-2 border rounded-md focus:ring-blue-500 focus:border-blue-500 ${formErrors.discount ? 'border-red-500' : ''}`}
+                  />
+                  {formErrors.discount && (
+                    <p className="text-red-500 text-xs mt-1">{formErrors.discount}</p>
+                  )}
+                </div>
+  
+                  
+                  {/* Mô tả sản phẩm */}
+
                 <div className="md:col-span-2">
                   <label className="block text-sm font-medium text-gray-700 mb-1">
                     Mô tả
@@ -318,6 +333,8 @@ export default function ProductDetail({ product, onEditSuccess, onDeleteSuccess,
                         <Image
                           src={localImagePreview}
                           alt="Ảnh đã chọn"
+                          width={96}
+                          height={96}
                           className="w-full h-full object-cover"
                         />
                         <button
@@ -336,6 +353,8 @@ export default function ProductDetail({ product, onEditSuccess, onDeleteSuccess,
                         <Image
                           src={editForm.image}
                           alt="Ảnh sản phẩm"
+                          width={96}
+                          height={96}
                           className="w-full h-full object-cover"
                         />
                         <button
@@ -420,6 +439,8 @@ export default function ProductDetail({ product, onEditSuccess, onDeleteSuccess,
                     <Image
                       src={product.image || "https://via.placeholder.com/300x300?text=No+Image"}
                       alt={product.name}
+                      width={300}
+                      height={300}
                       className="w-full h-full object-cover"
                     />
                   </div>
@@ -443,6 +464,14 @@ export default function ProductDetail({ product, onEditSuccess, onDeleteSuccess,
                       <p className="text-gray-500">Số lượng trong kho</p>
                       <p className="font-medium">{product.quantity} sản phẩm</p>
                     </div>
+
+                    {product.discount != null && product.discount > 0 && (
+                    <div>
+                      <p className="text-gray-500">Giảm giá</p>
+                      <p className="font-medium text-green-600">{product.discount}%</p>
+                    </div>
+                  )}
+
                     <div>
                       <p className="text-gray-500">Mức ưu tiên hiển thị</p>
                       <div className="flex items-center space-x-1">

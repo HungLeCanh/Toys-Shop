@@ -1,6 +1,8 @@
 // types/categories.ts
 
 export const categories: string[] = [
+    'Bé trai',
+    'Bé gái',
     'Giáo dục',
     'Ngoài trời',
     'Xếp hình',

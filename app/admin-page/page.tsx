@@ -15,6 +15,7 @@ const defaultForm: Omit<Product, 'id'> = {
   category: '',
   quantity: 0,
   priority: 3,
+  discount: 0,
 }
 
 export default function AdminPage() {
@@ -372,6 +373,21 @@ export default function AdminPage() {
                   className="w-full p-2.5 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-50"
                 />
               </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  % Giảm giá <span className="text-red-500">*</span>
+                </label>
+                <input
+                  required
+                  placeholder="Nhập % giảm giá"
+                  type="number"
+                  min="0"
+                  max="100"
+                  value={form.discount === 0 ? "" : form.discount}
+                  onChange={e => setForm({ ...form, discount: e.target.value === "" ? 0 : +e.target.value })}
+                  className="w-full p-2.5 border rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-gray-50"
+                />
+              </div>
 
               <div>
                 <label className="flex items-center text-sm font-medium text-gray-700 mb-1">
@@ -602,13 +618,27 @@ export default function AdminPage() {
                   </div>
                   
                   <div className="mt-3 flex justify-between items-center">
-                    <div className="text-lg font-bold text-red-600">
-                      {product.price.toLocaleString('vi-VN')} đ
+                    <div>
+                      {product.discount && product.discount > 0 ? (
+                        <div className="flex flex-col">
+                          <span className="text-sm text-gray-500 line-through">
+                            {product.price.toLocaleString('vi-VN')} đ
+                          </span>
+                          <span className="text-lg font-bold text-red-600">
+                            {(product.price * (1 - product.discount / 100)).toLocaleString('vi-VN')} đ
+                          </span>
+                        </div>
+                      ) : (
+                        <span className="text-lg font-bold text-red-600">
+                          {product.price.toLocaleString('vi-VN')} đ
+                        </span>
+                      )}
                     </div>
                     <div className="text-sm text-gray-500">
                       Còn {product.quantity} sản phẩm
                     </div>
                   </div>
+
                   
                   <div className="mt-4 flex justify-between items-center">
                     <div className="flex flex-col">

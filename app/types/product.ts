@@ -8,6 +8,7 @@ export type Product = {
     category: string
     quantity: number
     priority: number
+    discount?: number
     createdAt?: string
     updatedAt?: string
   }

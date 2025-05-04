@@ -158,13 +158,31 @@ export default function ProductInfo() {
                   )}
 
                   <div className="mt-4">
-                    <h2 className="text-3xl font-bold text-red-600">
-                      {product.price.toLocaleString('vi-VN')} đ
-                    </h2>
+                    {product.discount && product.discount > 0 ? (
+                      <>
+                        <div className="flex items-center gap-2">
+                          <h2 className="text-3xl font-bold text-red-600">
+                            {(product.price * (1 - product.discount / 100)).toLocaleString('vi-VN')} đ
+                          </h2>
+                          <span className="text-xs bg-yellow-200 text-yellow-800 font-semibold px-2 py-0.5 rounded">
+                            -{product.discount}%
+                          </span>
+                        </div>
+                        <div className="text-sm text-gray-400 line-through mt-1">
+                          {product.price.toLocaleString('vi-VN')} đ
+                        </div>
+                      </>
+                    ) : (
+                      <h2 className="text-3xl font-bold text-red-600">
+                        {product.price.toLocaleString('vi-VN')} đ
+                      </h2>
+                    )}
+                    
                     <p className="text-sm text-gray-500 mt-1">
                       Đã bao gồm thuế VAT
                     </p>
                   </div>
+
                 </div>
 
                 <div className="mb-8">

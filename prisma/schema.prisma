@@ -16,6 +16,7 @@ model Product {
   category    String
   quantity    Int
   priority    Int      @default(3) // Ưu tiên mặc định là 3
+  discount    Float?   @default(0) // Mặc định giảm 0%
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }

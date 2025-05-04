@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { Product } from '../types/product';
+import ProductGrid from './ProductGrid';
 
 interface FeaturedProductsProps {
   products: Product[];
@@ -9,7 +10,15 @@ interface FeaturedProductsProps {
 const FeaturedProducts: React.FC<FeaturedProductsProps> = ({ products }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const sliderRef = useRef<HTMLDivElement>(null);
+  // lọc sang các sản phẩm nổi bật
   const featuredProducts = products.filter(product => product.priority >= 3);
+  // sắp xếp theo độ ưu tiên cao nhất trước
+  featuredProducts.sort((a, b) => b.priority - a.priority);
+  // lọc các sản phẩm có giảm giá
+  const discountProducts = products.filter(product => product.discount && product.discount > 0);
+  // lọc các sản phẩm số lượng bé hơn 10
+  const lowStockProducts = featuredProducts.filter(product => product.quantity < 10);
+
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -49,12 +58,10 @@ const FeaturedProducts: React.FC<FeaturedProductsProps> = ({ products }) => {
     return <div className="text-center p-4">Không có sản phẩm nổi bật nào!</div>;
   }
   
-  const handleOpenProductInfo = (productId: number) => {
-    window.open(`/product-info?id=${productId}`, '_blank');
-  };
+
 
   return (
-    <div className="flex flex-col gap-4 p-2 sm:p-4">
+    <div className=" flex flex-col gap-4 p-2 sm:p-4 ">
       {/* Banner Section - Stacked vertically on mobile, side by side on desktop */}
       <div className="flex flex-col md:flex-row gap-4 bg-white rounded-lg shadow-md overflow-hidden">
         {/* Slider Image & Info - Full width on mobile */}
@@ -76,7 +83,7 @@ const FeaturedProducts: React.FC<FeaturedProductsProps> = ({ products }) => {
                       src={product.image}
                       alt={product.name}
                       fill
-                      className="objext-contain w-full h-full object-contain p-2 sm:p-4"
+                      className="object-contain w-full h-full p-2 sm:p-4"
                     />
                   ) : (
                     <div className="text-gray-500 text-center p-4">
@@ -179,56 +186,23 @@ const FeaturedProducts: React.FC<FeaturedProductsProps> = ({ products }) => {
         </div>
       </div>
 
-      {/* Products grid - Adjusted layout on mobile */}
-      <h2 className="text-xl sm:text-2xl font-bold text-blue-900 mt-2 sm:mt-4 mb-1 sm:mb-2 px-1 sm:px-0">Sản phẩm nổi bật</h2>
-      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-4">
-      {featuredProducts.map((product) => (
-        <div 
-          onClick={() => handleOpenProductInfo(product.id)}
-          key={product.id} 
-          className="bg-white border rounded-lg overflow-hidden shadow hover:shadow-md transition-shadow group flex flex-col h-full cursor-pointer"
-        >
-          <div className="relative h-32 sm:h-48 overflow-hidden">
-            {product.image ? (
-              <Image
-                src={product.image}
-                alt={product.name}
-                fill
-                className="object-contain w-full h-full object-contain group-hover:scale-105 transition-transform duration-300"
-              />
-            ) : (
-              <div className="w-full h-full flex items-center justify-center bg-gray-100">
-                <span className="text-gray-400 text-xs sm:text-sm">Không có hình ảnh</span>
-              </div>
-            )}
-            <div className="absolute top-0 right-0 bg-red-600 text-white px-1 sm:px-2 py-0.5 sm:py-1 m-1 sm:m-2 text-xs font-bold uppercase rounded">
-              Hot
-            </div>
-          </div>
-          <div className="p-2 sm:p-4 bg-blue-50 flex flex-col flex-grow hover:bg-orange-300">
-            <div className="flex flex-col mb-1 sm:mb-2">
-              <h3 className="font-semibold text-sm sm:text-lg text-gray-800 line-clamp-1">{product.name}</h3>
-              <span className="text-xs text-blue-800 truncate">{product.category}</span>
-            </div>
-            <p className="text-xs sm:text-sm text-gray-600 mb-2 sm:mb-3 line-clamp-1 sm:line-clamp-2 flex-grow">{product.description}</p>
-            <div className="flex justify-between items-center mt-auto">
-              <span className="font-bold text-red-600 text-sm sm:text-lg">{product.price.toLocaleString('vi-VN')} đ</span>
-              <span className="text-xs text-gray-500 bg-gray-100 px-1 sm:px-2 py-0.5 sm:py-1 rounded-full">Còn {product.quantity}</span>
-            </div>
-            <button
-              className="mt-2 sm:mt-3 w-full bg-yellow-300 text-blue-900 hover:bg-yellow-400 py-1.5 sm:py-2 rounded-md transition-colors text-xs sm:text-sm font-medium cursor-pointer"
-              onClick={(e) => {
-                e.stopPropagation();
-                handleOpenProductInfo(product.id);
-              }}
-            >
-              Thông tin chi tiết
-            </button>
-          </div>
-        </div>
-      ))}
-    </div>
+      {/* Sử dụng ProductGrid component cho Sản phẩm nổi bật */}
+      <ProductGrid 
+        products={featuredProducts} 
+        title="Sản phẩm nổi bật" 
+      />
 
+      {/* Sử dụng ProductGrid component cho Sản phẩm giảm giá */}
+      <ProductGrid 
+        products={discountProducts} 
+        title="Sản phẩm giảm giá"
+      />
+
+      {/* Sử dụng ProductGrid component cho Sản phẩm bán chạy nhất tháng */}
+      <ProductGrid 
+        products={lowStockProducts} 
+        title="Sản phẩm bán chạy nhất tháng" 
+      />
     </div>
   );
 };

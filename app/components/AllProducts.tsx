@@ -221,10 +221,29 @@ const AllProducts: React.FC<AllProductsProps> = ({ products }) => {
                   </div>
                   
                   {/* Phần giá và số lượng */}
-                  <div className="flex justify-between items-center mt-auto pt-2 border-t border-gray-100">
-                    <span className="font-bold text-sm md:text-base text-red-600">
-                      {product.price.toLocaleString('vi-VN')} đ
-                    </span>
+                  <div className="flex justify-between items-end mt-auto pt-2 border-t border-gray-100">
+                    <div className="flex flex-col">
+                      {product.discount && product.discount > 0 ? (
+                        <>
+                          <span className="text-gray-400 text-sm line-through">
+                            {product.price.toLocaleString('vi-VN')} đ
+                          </span>
+                          <div className="flex items-center gap-1">
+                            <span className="font-bold text-sm md:text-base text-red-600">
+                              {(product.price * (1 - product.discount / 100)).toLocaleString('vi-VN')} đ
+                            </span>
+                            <span className="text-[10px] bg-yellow-200 text-yellow-800 font-semibold px-1.5 py-0.5 rounded">
+                              -{product.discount}%
+                            </span>
+                          </div>
+                        </>
+                      ) : (
+                        <span className="font-bold text-sm md:text-base text-red-600">
+                          {product.price.toLocaleString('vi-VN')} đ
+                        </span>
+                      )}
+                    </div>
+                    
                     <span className={`text-xs px-1.5 py-0.5 rounded ${
                       product.quantity > 10 
                         ? 'bg-green-100 text-green-700' 
