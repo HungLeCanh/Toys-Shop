@@ -192,6 +192,21 @@ const FeaturedProducts: React.FC<FeaturedProductsProps> = ({ products }) => {
         title="Sản phẩm nổi bật" 
       />
 
+      {/* 3 ô vuông bo góc nằm ngang có chữ An toàn, Lành mạnh, Bền bỉ*/}
+      <div className="flex flex-row flex-wrap gap-2 sm:gap-4 bg-transparent rounded-lg overflow-hidden p-2 sm:p-4">
+        <div className="flex-1 h-20 min-w-[100px] flex items-center justify-center bg-green-100 text-green-600 rounded-lg p-3 text-center font-semibold text-sm sm:text-3xl">
+          An toàn
+        </div>
+        <div className="flex-1 h-20 min-w-[100px] flex items-center justify-center bg-yellow-100 text-yellow-600 rounded-lg p-3 text-center font-semibold text-sm sm:text-3xl">
+          Lành mạnh
+        </div>
+        <div className="flex-1 h-20 min-w-[100px] flex items-center justify-center bg-blue-100 text-blue-600 rounded-lg p-3 text-center font-semibold text-sm sm:text-3xl">
+          Bền bỉ
+        </div>
+      </div>
+
+
+
       {/* Sử dụng ProductGrid component cho Sản phẩm giảm giá */}
       <ProductGrid 
         products={discountProducts} 

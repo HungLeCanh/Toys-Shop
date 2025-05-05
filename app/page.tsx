@@ -4,7 +4,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import FeaturedProducts from './components/FeaturedProducts';
 import AllProducts from './components/AllProducts';
 import { Product } from './types/product';
-import { Search, X} from 'lucide-react';
+import { Search, X, MessageCircle } from 'lucide-react';
 import Image from 'next/image';
 
 enum Tab {
@@ -90,6 +90,9 @@ export default function Page() {
       console.log("Chưa nhập địa chỉ ở .env kìa anh ơi")
       return <p>Lỗi không có thông tin</p>
     }
+    const shopNameUrl = facebookUrl.split("/").filter(Boolean).pop();
+    const messengerLink = `https://m.me/${shopNameUrl}`;
+
   
 
 
@@ -406,6 +409,18 @@ export default function Page() {
           </>
         )}
       </main>
+
+      {/* Messenger button */}
+      <button 
+        className="fixed bottom-6 right-4 md:bottom-10 md:right-10 z-50 
+                  bg-blue-600 hover:bg-blue-700 text-white 
+                  p-2 md:p-3 rounded-full shadow-lg 
+                  transition-all duration-300 ease-in-out cursor-pointer"
+        onClick={() => window.open(messengerLink, '_blank')}
+        aria-label="Messenger"
+      >
+        <MessageCircle size={24} className="md:size-8" />
+      </button>
 
       {/* Footer */}
       <footer className="bg-blue-100 border-t border-gray-200 mt-auto">

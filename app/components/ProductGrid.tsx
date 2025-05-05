@@ -159,7 +159,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ products, title }) => {
 
   return (
     <div className="px-2 sm:px-4 md:px-6 lg:px-0 pb-4 sm:pb-8">
-      <h2 className="text-xl sm:text-3xl font-bold text-blue-900 mt-4 sm:mt-6 mb-3 sm:mb-4">
+      <h2 className="text-xl sm:text-3xl font-bold text-red-600 mt-4 sm:mt-6 mb-3 sm:mb-4">
         {title}
       </h2>
       <div 
