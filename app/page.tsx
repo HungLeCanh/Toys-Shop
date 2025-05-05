@@ -418,6 +418,7 @@ export default function Page() {
                   transition-all duration-300 ease-in-out cursor-pointer"
         onClick={() => window.open(messengerLink, '_blank')}
         aria-label="Messenger"
+        title="Liên hệ Messenger cửa hàng"
       >
         <MessageCircle size={24} className="md:size-8" />
       </button>
