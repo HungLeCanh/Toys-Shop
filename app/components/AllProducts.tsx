@@ -89,7 +89,7 @@ const AllProducts: React.FC<AllProductsProps> = ({ products }) => {
   }
 
   return (
-    <div className="relative flex flex-col md:flex-row">
+    <div className="relative flex flex-col md:flex-row pb-4">
       {/* Mobile Filter Button */}
       <div className="md:hidden sticky top-0 z-10 bg-white p-3 mb-3 border-b shadow-sm">
         <button 
