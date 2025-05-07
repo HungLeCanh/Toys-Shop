@@ -230,7 +230,7 @@ const Home: React.FC<HomeProps> = ({ products, handleTabChange }) => {
       {/* Featured Products Section */}
       <div className="w-full px-4 py-8">
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl font-bold">Sản phẩm nổi bật</h2>
+        <h2 className="text-2xl text-black font-bold">Sản phẩm nổi bật</h2>
         <button 
           className="text-blue-600 hover:underline"
           onClick={() => {
@@ -264,7 +264,7 @@ const Home: React.FC<HomeProps> = ({ products, handleTabChange }) => {
             </div>
             
             <div className="p-4 flex flex-col flex-grow">
-              <h3 className="text-lg font-semibold mb-2 line-clamp-2 h-14">{product.name}</h3>
+              <h3 className="text-lg text-black font-semibold mb-2 line-clamp-2 h-14">{product.name}</h3>
               <p className="text-gray-600 mb-4 line-clamp-2 h-12">{product.description}</p>
               
               <div className="mt-auto">
@@ -311,7 +311,7 @@ const Home: React.FC<HomeProps> = ({ products, handleTabChange }) => {
             <div className="mx-auto w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-pink-100 rounded-full flex items-center justify-center mb-3 sm:mb-4">
               <ShieldCheck size={20} className="text-pink-500 sm:w-6 sm:h-6 md:w-7 md:h-7" />
             </div>
-            <h3 className="font-semibold text-base sm:text-lg mb-1 sm:mb-2">An toàn & Chất lượng</h3>
+            <h3 className="font-semibold text-base text-black sm:text-lg mb-1 sm:mb-2">An toàn & Chất lượng</h3>
             <p className="text-gray-600 text-sm sm:text-base">
               Đồ chơi của chúng tôi được kiểm định nghiêm ngặt, đảm bảo an toàn cho trẻ
             </p>
@@ -320,7 +320,7 @@ const Home: React.FC<HomeProps> = ({ products, handleTabChange }) => {
             <div className="mx-auto w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-purple-100 rounded-full flex items-center justify-center mb-3 sm:mb-4">
               <Truck size={20} className="text-purple-500 sm:w-6 sm:h-6 md:w-7 md:h-7" />
             </div>
-            <h3 className="font-semibold text-base sm:text-lg mb-1 sm:mb-2">Giao hàng nhanh chóng</h3>
+            <h3 className="font-semibold text-base text-black sm:text-lg mb-1 sm:mb-2">Giao hàng nhanh chóng</h3>
             <p className="text-gray-600 text-sm sm:text-base">
               Freeship cho đơn hàng nội thành và giao hàng toàn quốc
             </p>
@@ -329,7 +329,7 @@ const Home: React.FC<HomeProps> = ({ products, handleTabChange }) => {
             <div className="mx-auto w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-green-100 rounded-full flex items-center justify-center mb-3 sm:mb-4">
               <Gift size={20} className="text-green-500 sm:w-6 sm:h-6 md:w-7 md:h-7" />
             </div>
-            <h3 className="font-semibold text-base sm:text-lg mb-1 sm:mb-2">Quà tặng hấp dẫn</h3>
+            <h3 className="font-semibold text-base text-black sm:text-lg mb-1 sm:mb-2">Quà tặng hấp dẫn</h3>
             <p className="text-gray-600 text-sm sm:text-base">
               Nhiều ưu đãi và quà tặng đặc biệt khi mua sắm tại cửa hàng
             </p>
@@ -338,7 +338,7 @@ const Home: React.FC<HomeProps> = ({ products, handleTabChange }) => {
             <div className="mx-auto w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-yellow-100 rounded-full flex items-center justify-center mb-3 sm:mb-4">
               <Star size={20} className="text-yellow-500 sm:w-6 sm:h-6 md:w-7 md:h-7" />
             </div>
-            <h3 className="font-semibold text-base sm:text-lg mb-1 sm:mb-2">Đa dạng sản phẩm</h3>
+            <h3 className="font-semibold text-base text-black sm:text-lg mb-1 sm:mb-2">Đa dạng sản phẩm</h3>
             <p className="text-gray-600 text-sm sm:text-base">
               Hàng nghìn mặt hàng đồ chơi phù hợp mọi lứa tuổi và sở thích
             </p>
@@ -356,7 +356,7 @@ const Home: React.FC<HomeProps> = ({ products, handleTabChange }) => {
             <div className="flex items-center mb-3 sm:mb-4">
               <div className="w-10 h-10 sm:w-12 sm:h-12 bg-pink-100 rounded-full mr-3 sm:mr-4"></div>
               <div>
-                <h4 className="font-semibold text-sm sm:text-base">Nguyễn Thanh Hà</h4>
+                <h4 className="font-semibold text-sm text-black sm:text-base">Nguyễn Thanh Hà</h4>
                 <div className="flex text-yellow-400">
                   <Star size={12} className="sm:w-4 sm:h-4" fill="currentColor" />
                   <Star size={12} className="sm:w-4 sm:h-4" fill="currentColor" />
@@ -375,7 +375,7 @@ const Home: React.FC<HomeProps> = ({ products, handleTabChange }) => {
             <div className="flex items-center mb-3 sm:mb-4">
               <div className="w-10 h-10 sm:w-12 sm:h-12 bg-purple-100 rounded-full mr-3 sm:mr-4"></div>
               <div>
-                <h4 className="font-semibold text-sm sm:text-base">Trần Minh Tuấn</h4>
+                <h4 className="font-semibold text-sm text-black sm:text-base">Trần Minh Tuấn</h4>
                 <div className="flex text-yellow-400">
                   <Star size={12} className="sm:w-4 sm:h-4" fill="currentColor" />
                   <Star size={12} className="sm:w-4 sm:h-4" fill="currentColor" />
@@ -394,7 +394,7 @@ const Home: React.FC<HomeProps> = ({ products, handleTabChange }) => {
             <div className="flex items-center mb-3 sm:mb-4">
               <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-100 rounded-full mr-3 sm:mr-4"></div>
               <div>
-                <h4 className="font-semibold text-sm sm:text-base">Phạm Thu Trang</h4>
+                <h4 className="font-semibold text-sm text-black sm:text-base">Phạm Thu Trang</h4>
                 <div className="flex text-yellow-400">
                   <Star size={12} className="sm:w-4 sm:h-4" fill="currentColor" />
                   <Star size={12} className="sm:w-4 sm:h-4" fill="currentColor" />
