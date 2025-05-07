@@ -291,7 +291,8 @@ const Home: React.FC<HomeProps> = ({ products, handleTabChange }) => {
           <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col h-full">
             <div className="relative w-full pt-[100%]"> {/* Equal aspect ratio */}
               {product.image ? (
-                <img 
+                <Image
+                  fill 
                   src={product.image} 
                   alt={product.name}
                   className="absolute top-0 left-0 w-full h-full object-cover"

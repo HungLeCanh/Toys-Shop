@@ -13,7 +13,7 @@ const AllProducts: React.FC<AllProductsProps> = ({ products }) => {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>(products);
   const [showCategoriesMobile, setShowCategoriesMobile] = useState(false);
-  const [showDesktopCategories, setShowDesktopCategories] = useState(true);
+  const [showDesktopCategories] = useState(true);
   const sidebarRef = useRef<HTMLDivElement>(null);
   
   // Extract unique categories from all products
