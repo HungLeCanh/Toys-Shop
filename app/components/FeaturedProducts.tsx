@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { Product } from '../types/product';
 import ProductGrid from './ProductGrid';
+import { ShieldCheck, HeartPulse, BatteryCharging } from "lucide-react"
 
 interface FeaturedProductsProps {
   products: Product[];
@@ -193,15 +194,18 @@ const FeaturedProducts: React.FC<FeaturedProductsProps> = ({ products }) => {
       />
 
       {/* 3 ô vuông bo góc nằm ngang có chữ An toàn, Lành mạnh, Bền bỉ*/}
-      <div className="flex flex-row flex-wrap gap-2 sm:gap-4 bg-transparent rounded-lg overflow-hidden p-2 sm:p-4">
-        <div className="flex-1 h-20 min-w-[100px] flex items-center justify-center bg-green-100 text-green-600 rounded-lg p-3 text-center font-semibold text-sm sm:text-3xl">
-          An toàn
+      <div className="flex flex-row flex-wrap gap-4 bg-white rounded-2xl overflow-hidden p-4 shadow-md">
+        <div className="flex-1 min-w-[120px] h-28 flex flex-col items-center justify-center bg-gradient-to-t from-green-200 to-green-50 text-green-700 rounded-xl p-4 transition-all duration-300 hover:scale-105">
+          <ShieldCheck className="w-6 h-6 mb-2 sm:w-10 sm:h-10" />
+          <span className="font-bold text-sm sm:text-2xl">An toàn</span>
         </div>
-        <div className="flex-1 h-20 min-w-[100px] flex items-center justify-center bg-yellow-100 text-yellow-600 rounded-lg p-3 text-center font-semibold text-sm sm:text-3xl">
-          Lành mạnh
+        <div className="flex-1 min-w-[120px] h-28 flex flex-col items-center justify-center bg-gradient-to-t from-yellow-200 to-yellow-50 text-yellow-700 rounded-xl p-4 transition-all duration-300 hover:scale-105">
+          <HeartPulse className="w-6 h-6 mb-2 sm:w-10 sm:h-10" />
+          <span className="font-bold text-sm sm:text-2xl">Lành mạnh</span>
         </div>
-        <div className="flex-1 h-20 min-w-[100px] flex items-center justify-center bg-blue-100 text-blue-600 rounded-lg p-3 text-center font-semibold text-sm sm:text-3xl">
-          Bền bỉ
+        <div className="flex-1 min-w-[120px] h-28 flex flex-col items-center justify-center bg-gradient-to-t from-blue-200 to-blue-50 text-blue-700 rounded-xl p-4 transition-all duration-300 hover:scale-105">
+          <BatteryCharging className="w-6 h-6 mb-2 sm:w-10 sm:h-10" />
+          <span className="font-bold text-sm sm:text-2xl">Bền bỉ</span>
         </div>
       </div>
 

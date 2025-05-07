@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { Product } from '../types/product';
-import { X, Filter, ChevronRight, ChevronLeft } from 'lucide-react';
+import { X, Filter} from 'lucide-react';
 
 interface AllProductsProps {
   products: Product[];
@@ -184,13 +184,13 @@ const AllProducts: React.FC<AllProductsProps> = ({ products }) => {
       {/* Desktop Categories Sidebar */}
       <div className={`hidden md:block md:w-64 lg:w-72 sticky top-4 self-start ${showDesktopCategories ? 'pr-4' : 'w-auto'}`}>
         {/* Toggle sidebar visibility on desktop */}
-        <button 
+        {/* <button 
           onClick={() => setShowDesktopCategories(!showDesktopCategories)}
           className="absolute -right-3 top-4 bg-white z-10 p-1 rounded-full border shadow-sm hover:bg-gray-50"
           aria-label={showDesktopCategories ? "Ẩn danh mục" : "Hiển thị danh mục"}
         >
           {showDesktopCategories ? <ChevronLeft className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
-        </button>
+        </button> */}
 
         {showDesktopCategories && (
           <div className="bg-white border rounded-lg shadow-sm overflow-hidden h-[calc(100vh-2rem)] sticky top-4">
