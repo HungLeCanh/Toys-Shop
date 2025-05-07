@@ -227,6 +227,51 @@ const Home: React.FC<HomeProps> = ({ products, handleTabChange }) => {
         </div>
       </div>
 
+      {/* Benefits Section */}
+      <div className="bg-purple-50 rounded-lg p-4 sm:p-6 md:p-8 mb-8 sm:mb-12 md:mb-16">
+        <h2 className="text-2xl sm:text-3xl font-bold text-center text-gray-800 mb-6 sm:mb-8 md:mb-10">
+          Tại sao chọn Shop ABC?
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          <div className="bg-white p-4 sm:p-6 rounded-lg shadow-md text-center">
+            <div className="mx-auto w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-pink-100 rounded-full flex items-center justify-center mb-3 sm:mb-4">
+              <ShieldCheck size={20} className="text-pink-500 sm:w-6 sm:h-6 md:w-7 md:h-7" />
+            </div>
+            <h3 className="font-semibold text-base text-black sm:text-lg mb-1 sm:mb-2">An toàn & Chất lượng</h3>
+            <p className="text-gray-600 text-sm sm:text-base">
+              Đồ chơi của chúng tôi được kiểm định nghiêm ngặt, đảm bảo an toàn cho trẻ
+            </p>
+          </div>
+          <div className="bg-white p-4 sm:p-6 rounded-lg shadow-md text-center">
+            <div className="mx-auto w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-purple-100 rounded-full flex items-center justify-center mb-3 sm:mb-4">
+              <Truck size={20} className="text-purple-500 sm:w-6 sm:h-6 md:w-7 md:h-7" />
+            </div>
+            <h3 className="font-semibold text-base text-black sm:text-lg mb-1 sm:mb-2">Giao hàng nhanh chóng</h3>
+            <p className="text-gray-600 text-sm sm:text-base">
+              Freeship cho đơn hàng nội thành và giao hàng toàn quốc
+            </p>
+          </div>
+          <div className="bg-white p-4 sm:p-6 rounded-lg shadow-md text-center">
+            <div className="mx-auto w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-green-100 rounded-full flex items-center justify-center mb-3 sm:mb-4">
+              <Gift size={20} className="text-green-500 sm:w-6 sm:h-6 md:w-7 md:h-7" />
+            </div>
+            <h3 className="font-semibold text-base text-black sm:text-lg mb-1 sm:mb-2">Quà tặng hấp dẫn</h3>
+            <p className="text-gray-600 text-sm sm:text-base">
+              Nhiều ưu đãi và quà tặng đặc biệt khi mua sắm tại cửa hàng
+            </p>
+          </div>
+          <div className="bg-white p-4 sm:p-6 rounded-lg shadow-md text-center">
+            <div className="mx-auto w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-yellow-100 rounded-full flex items-center justify-center mb-3 sm:mb-4">
+              <Star size={20} className="text-yellow-500 sm:w-6 sm:h-6 md:w-7 md:h-7" />
+            </div>
+            <h3 className="font-semibold text-base text-black sm:text-lg mb-1 sm:mb-2">Đa dạng sản phẩm</h3>
+            <p className="text-gray-600 text-sm sm:text-base">
+              Hàng nghìn mặt hàng đồ chơi phù hợp mọi lứa tuổi và sở thích
+            </p>
+          </div>
+        </div>
+      </div>
+
       {/* Featured Products Section */}
       <div className="w-full px-4 py-8">
       <div className="flex justify-between items-center mb-6">
@@ -301,50 +346,7 @@ const Home: React.FC<HomeProps> = ({ products, handleTabChange }) => {
       {/* Pagination removed as requested */}
     </div>
 
-      {/* Benefits Section */}
-      <div className="bg-purple-50 rounded-lg p-4 sm:p-6 md:p-8 mb-8 sm:mb-12 md:mb-16">
-        <h2 className="text-2xl sm:text-3xl font-bold text-center text-gray-800 mb-6 sm:mb-8 md:mb-10">
-          Tại sao chọn Shop ABC?
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-          <div className="bg-white p-4 sm:p-6 rounded-lg shadow-md text-center">
-            <div className="mx-auto w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-pink-100 rounded-full flex items-center justify-center mb-3 sm:mb-4">
-              <ShieldCheck size={20} className="text-pink-500 sm:w-6 sm:h-6 md:w-7 md:h-7" />
-            </div>
-            <h3 className="font-semibold text-base text-black sm:text-lg mb-1 sm:mb-2">An toàn & Chất lượng</h3>
-            <p className="text-gray-600 text-sm sm:text-base">
-              Đồ chơi của chúng tôi được kiểm định nghiêm ngặt, đảm bảo an toàn cho trẻ
-            </p>
-          </div>
-          <div className="bg-white p-4 sm:p-6 rounded-lg shadow-md text-center">
-            <div className="mx-auto w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-purple-100 rounded-full flex items-center justify-center mb-3 sm:mb-4">
-              <Truck size={20} className="text-purple-500 sm:w-6 sm:h-6 md:w-7 md:h-7" />
-            </div>
-            <h3 className="font-semibold text-base text-black sm:text-lg mb-1 sm:mb-2">Giao hàng nhanh chóng</h3>
-            <p className="text-gray-600 text-sm sm:text-base">
-              Freeship cho đơn hàng nội thành và giao hàng toàn quốc
-            </p>
-          </div>
-          <div className="bg-white p-4 sm:p-6 rounded-lg shadow-md text-center">
-            <div className="mx-auto w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-green-100 rounded-full flex items-center justify-center mb-3 sm:mb-4">
-              <Gift size={20} className="text-green-500 sm:w-6 sm:h-6 md:w-7 md:h-7" />
-            </div>
-            <h3 className="font-semibold text-base text-black sm:text-lg mb-1 sm:mb-2">Quà tặng hấp dẫn</h3>
-            <p className="text-gray-600 text-sm sm:text-base">
-              Nhiều ưu đãi và quà tặng đặc biệt khi mua sắm tại cửa hàng
-            </p>
-          </div>
-          <div className="bg-white p-4 sm:p-6 rounded-lg shadow-md text-center">
-            <div className="mx-auto w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 bg-yellow-100 rounded-full flex items-center justify-center mb-3 sm:mb-4">
-              <Star size={20} className="text-yellow-500 sm:w-6 sm:h-6 md:w-7 md:h-7" />
-            </div>
-            <h3 className="font-semibold text-base text-black sm:text-lg mb-1 sm:mb-2">Đa dạng sản phẩm</h3>
-            <p className="text-gray-600 text-sm sm:text-base">
-              Hàng nghìn mặt hàng đồ chơi phù hợp mọi lứa tuổi và sở thích
-            </p>
-          </div>
-        </div>
-      </div>
+
 
       {/* Testimonials */}
       <div className="bg-purple-50 rounded-lg p-4 sm:p-6 md:p-8 mb-8 sm:mb-12 md:mb-16">
