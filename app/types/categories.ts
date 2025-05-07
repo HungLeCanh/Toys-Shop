@@ -3,8 +3,9 @@
 export const categories: string[] = [
     'Bé trai',
     'Bé gái',
-    'Giáo dục',
+    'Trong nhà',
     'Ngoài trời',
+    'Giáo dục',
     'Xếp hình',
     'Lắp ráp',
     'Thú nhồi bông',

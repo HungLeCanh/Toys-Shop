@@ -296,7 +296,7 @@ export default function ProductDetail({ product, onEditSuccess, onDeleteSuccess,
                     max="100"
                     value={editForm.discount ?? ""}
                     onChange={e =>
-                      setEditForm({ ...editForm, discount: e.target.value === "" ? undefined : +e.target.value })
+                      setEditForm({ ...editForm, discount: e.target.value === "" ? 0 : +e.target.value })
                     }
                     className={`w-full p-2 border rounded-md focus:ring-blue-500 focus:border-blue-500 ${formErrors.discount ? 'border-red-500' : ''}`}
                   />

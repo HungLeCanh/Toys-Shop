@@ -3,17 +3,19 @@
 import React, { useEffect, useState, useRef } from 'react';
 import FeaturedProducts from './components/FeaturedProducts';
 import AllProducts from './components/AllProducts';
+import Home from './components/Home';
 import { Product } from './types/product';
 import { Search, X, MessageCircle } from 'lucide-react';
 import Image from 'next/image';
 
 enum Tab {
+  Home = 'home',
   Featured = 'featured',
   All = 'all'
 }
 
 export default function Page() {
-  const [activeTab, setActiveTab] = useState<Tab>(Tab.Featured);
+  const [activeTab, setActiveTab] = useState<Tab>(Tab.Home);
   const [products, setProducts] = useState<Product[]>([]);
   const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
@@ -23,6 +25,26 @@ export default function Page() {
   const [mobileSearchActive, setMobileSearchActive] = useState<boolean>(false);
   const searchResultsRef = useRef<HTMLDivElement>(null);
   const searchInputRef = useRef<HTMLInputElement>(null);
+  const [showHeader, setShowHeader] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY > lastScrollY && currentScrollY > 50) {
+        setShowHeader(false); // cuộn xuống -> ẩn
+      } else {
+        setShowHeader(true); // cuộn lên -> hiện
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -133,9 +155,13 @@ export default function Page() {
   };
 
   return (
-    <div className="min-h-screen  flex flex-col bg-pink-200">
+    <div className="min-h-screen  flex flex-col bg-purple-200">
       {/* Header */}
-      <header className="bg-blue-100 sticky top-0 z-10 shadow-md">
+      <header
+        className={`bg-blue-100 fixed top-0 left-0 w-full z-10 shadow-md h-[110px] md:h-[80px] transition-transform duration-300 ${
+          showHeader ? "translate-y-0" : "-translate-y-full"
+        }`}
+      >
         <div className="container mx-auto max-w-6xl">
           {/* Desktop Header */}
           <div className="hidden md:flex md:flex-row items-center justify-between p-4 gap-4">
@@ -219,6 +245,17 @@ export default function Page() {
             <div className="flex space-x-2">
               <button
                 className={`px-6 py-2 rounded-full transition-all font-medium cursor-pointer ${
+                  activeTab === Tab.Home
+                    ? 'bg-blue-600 text-white shadow-md'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+                onClick={() => handleTabChange(Tab.Home)}
+              >
+                Trang chủ
+              </button>
+
+              <button
+                className={`px-6 py-2 rounded-full transition-all font-medium cursor-pointer ${
                   activeTab === Tab.Featured
                     ? 'bg-blue-600 text-white shadow-md'
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
@@ -242,7 +279,9 @@ export default function Page() {
           </div>
 
           {/* Mobile Header */}
-          <div className="md:hidden">
+          <div
+            className= "md:hidden"
+          >
             {/* Thanh trên cùng mobile */}
             <div className="flex items-center justify-between p-3">
               <h1 className="text-xl font-bold text-blue-700">{shopName}</h1>
@@ -345,6 +384,17 @@ export default function Page() {
               <div className="flex w-full rounded-full overflow-hidden bg-gray-100 p-1">
                 <button
                   className={`flex-1 py-2 text-center text-sm transition-all font-medium rounded-full ${
+                    activeTab === Tab.Home
+                      ? 'bg-blue-600 text-white shadow-sm'
+                      : 'text-gray-700'
+                  }`}
+                  onClick={() => handleTabChange(Tab.Home)}
+                >
+                  Trang chủ
+                </button>
+
+                <button
+                  className={`flex-1 py-2 text-center text-sm transition-all font-medium rounded-full ${
                     activeTab === Tab.Featured
                       ? 'bg-blue-600 text-white shadow-sm'
                       : 'text-gray-700'
@@ -371,7 +421,7 @@ export default function Page() {
       </header>
 
       {/* Main Content */}
-      <main className="flex-grow container mx-auto max-w-6xl px-4 py-4 md:py-6">
+      <main className="flex-grow container mx-auto max-w-7xl px-1 py-0 md:py-6 mt-[120px] md:mt-[80px]">
         {loading ? (
           <div className="flex flex-col justify-center items-center h-64">
             <div className="animate-spin rounded-full h-12 w-12 md:h-16 md:w-16 border-t-4 border-b-4 border-blue-500"></div>
@@ -403,7 +453,8 @@ export default function Page() {
                 <div className="h-1 w-16 md:w-20 bg-blue-500 rounded-full"></div>
               </div>
             )}
-            
+
+            {activeTab === Tab.Home && (<Home products={filteredProducts} handleTabChange={handleTabChange} />)}
             {activeTab === Tab.Featured && <FeaturedProducts products={filteredProducts} />}
             {activeTab === Tab.All && <AllProducts products={filteredProducts} />}
           </>
@@ -412,7 +463,7 @@ export default function Page() {
 
       {/* Messenger button */}
       <button 
-        className="fixed bottom-6 right-4 md:bottom-10 md:right-10 z-50 
+        className="fixed bottom-6 left-4 md:bottom-10 md:left-10 z-50 
                   bg-blue-600 hover:bg-blue-700 text-white 
                   p-2 md:p-3 rounded-full shadow-lg 
                   transition-all duration-300 ease-in-out cursor-pointer"
