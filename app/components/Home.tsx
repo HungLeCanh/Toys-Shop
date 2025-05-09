@@ -161,6 +161,84 @@ const Home: React.FC<HomeProps> = ({ products, handleTabChange }) => {
         </div>
       </div>
 
+      {/* Featured Products Section */}
+      <div className="w-full px-4 py-8">
+      <div className="flex justify-between items-center mb-6">
+        <h2 className="text-2xl sm:text-3xl text-black font-bold">Sản phẩm nổi bật</h2>
+        <button 
+          className="text-blue-600 hover:underline"
+          onClick={() => {
+            handleTabChange(Tab.All);
+          }}
+        >
+          Xem tất cả
+        </button>
+      </div>
+      
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {displayProducts.map((product, index) => (
+          <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col h-full">
+            {/* Image container with padding to create space for rounded frame */}
+            <div className="p-3">
+              {/* Rounded image container with fixed aspect ratio */}
+              <div className="relative w-full pt-[100%] rounded-lg overflow-hidden">
+                {product.image ? (
+                  <Image
+                    fill
+                    src={product.image}
+                    alt={product.name}
+                    className="absolute top-0 left-0 w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="absolute top-0 left-0 w-full h-full bg-gray-200 flex items-center justify-center rounded-lg">
+                    <span className="text-gray-400">No image</span>
+                  </div>
+                )}
+                {product.discount > 0 && (
+                  <div className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded text-sm">
+                    -{product.discount}%
+                  </div>
+                )}
+              </div>
+            </div>
+            
+            <div className="p-4 flex flex-col flex-grow">
+              <h3 className="text-lg text-black font-semibold mb-2 line-clamp-2 h-14">{product.name}</h3>
+              <p className="text-gray-600 mb-4 line-clamp-2 h-12">{product.description}</p>
+              
+              <div className="mt-auto">
+                <div className="flex items-center gap-2 mb-3">
+                  {product.discount ? (
+                    <>
+                      <span className="text-red-600 font-bold">
+                        {Math.round(product.price * (1 - product.discount / 100)).toLocaleString()}đ
+                      </span>
+                      <span className="text-gray-500 line-through text-sm">
+                        {product.price.toLocaleString()}đ
+                      </span>
+                    </>
+                  ) : (
+                    <span className="text-gray-800 font-bold">
+                      {product.price.toLocaleString()}đ
+                    </span>
+                  )}
+                </div>
+                <button
+                  className="w-full bg-cyan-600 text-white py-2 rounded-full hover:bg-blue-700 transition"
+                  onClick={() => {
+                    handleTabChange(Tab.All);
+                  }}
+                >
+                  Xem thêm
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      {/* Pagination removed as requested */}
+    </div>
+
       {/* Categories showcase */}
       <div className="mb-8 sm:mb-12 md:mb-16">
         <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-4 sm:mb-6">
@@ -227,6 +305,8 @@ const Home: React.FC<HomeProps> = ({ products, handleTabChange }) => {
         </div>
       </div>
 
+
+
       {/* Benefits Section */}
       <div className="bg-purple-50 rounded-lg p-4 sm:p-6 md:p-8 mb-8 sm:mb-12 md:mb-16">
         <h2 className="text-2xl sm:text-3xl font-bold text-center text-gray-800 mb-6 sm:mb-8 md:mb-10">
@@ -272,80 +352,7 @@ const Home: React.FC<HomeProps> = ({ products, handleTabChange }) => {
         </div>
       </div>
 
-      {/* Featured Products Section */}
-      <div className="w-full px-4 py-8">
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-2xl text-black font-bold">Sản phẩm nổi bật</h2>
-        <button 
-          className="text-blue-600 hover:underline"
-          onClick={() => {
-            handleTabChange(Tab.All);
-          }}
-        >
-          Xem tất cả
-        </button>
-      </div>
-      
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {displayProducts.map((product, index) => (
-          <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col h-full">
-            <div className="relative w-full pt-[100%]"> {/* Equal aspect ratio */}
-              {product.image ? (
-                <Image
-                  fill 
-                  src={product.image} 
-                  alt={product.name}
-                  className="absolute top-0 left-0 w-full h-full object-cover"
-                />
-              ) : (
-                <div className="absolute top-0 left-0 w-full h-full bg-gray-200 flex items-center justify-center">
-                  <span className="text-gray-400">No image</span>
-                </div>
-              )}
-              {product.discount > 0 && (
-                <div className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 rounded text-sm">
-                  -{product.discount}%
-                </div>
-              )}
-            </div>
-            
-            <div className="p-4 flex flex-col flex-grow">
-              <h3 className="text-lg text-black font-semibold mb-2 line-clamp-2 h-14">{product.name}</h3>
-              <p className="text-gray-600 mb-4 line-clamp-2 h-12">{product.description}</p>
-              
-              <div className="mt-auto">
-                <div className="flex items-center gap-2 mb-3">
-                  {product.discount ? (
-                    <>
-                      <span className="text-red-600 font-bold">
-                        {Math.round(product.price * (1 - product.discount / 100)).toLocaleString()}đ
-                      </span>
-                      <span className="text-gray-500 line-through text-sm">
-                        {product.price.toLocaleString()}đ
-                      </span>
-                    </>
-                  ) : (
-                    <span className="text-gray-800 font-bold">
-                      {product.price.toLocaleString()}đ
-                    </span>
-                  )}
-                </div>
-                <button 
-                  className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
-                  onClick={() => {
-                    handleTabChange(Tab.All);
-                  }}
-                >
-                  Xem thêm
-                </button>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-      
-      {/* Pagination removed as requested */}
-    </div>
+
 
 
 

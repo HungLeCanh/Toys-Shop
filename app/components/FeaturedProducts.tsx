@@ -99,7 +99,7 @@ const FeaturedProducts: React.FC<FeaturedProductsProps> = ({ products }) => {
                     Nổi bật
                   </span>
                   <h3 className="text-sm sm:text-base font-semibold text-gray-800 line-clamp-1 sm:line-clamp-2">{product.name}</h3>
-                  <p className="text-base sm:text-lg font-bold text-primary">
+                  <p className="text-base sm:text-lg font-bold text-primary text-black">
                     {product.price.toLocaleString('vi-VN')} đ
                   </p>
                 </div>

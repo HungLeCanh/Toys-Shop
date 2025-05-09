@@ -28,6 +28,14 @@ export default function Page() {
   const [showHeader, setShowHeader] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
 
+  // Tự động cuộn lên đầu trang khi đổi tab
+  useEffect(() => {
+    const handleTabChange = () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+    handleTabChange();
+  }, [activeTab]);
+
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -155,10 +163,10 @@ export default function Page() {
   };
 
   return (
-    <div className="min-h-screen  flex flex-col bg-purple-200">
+    <div className="min-h-screen  flex flex-col bg-yellow-50">
       {/* Header */}
       <header
-        className={`bg-blue-100 fixed top-0 left-0 w-full z-10 shadow-md h-[110px] md:h-[80px] transition-transform duration-300 ${
+        className={`bg-blue-100 fixed top-0 left-0 w-full z-40 shadow-md h-[110px] md:h-[80px] transition-transform duration-300 ${
           showHeader ? "translate-y-0" : "-translate-y-full"
         }`}
       >
@@ -205,6 +213,8 @@ export default function Page() {
                             <div className="h-12 w-12 flex-shrink-0 rounded bg-gray-100 overflow-hidden">
                               {product.image ? (
                                 <Image 
+                                  width={48}
+                                  height={48}
                                   src={product.image} 
                                   alt={product.name}
                                   className="w-full h-full object-cover"
@@ -330,20 +340,22 @@ export default function Page() {
             {showSearchResults && searchTerm.trim() !== '' && mobileSearchActive && (
               <div 
                 ref={searchResultsRef}
-                className="absolute z-20 left-0 right-0 bg-white border-t border-gray-200 shadow-md max-h-96 overflow-y-auto"
+                className="absolute z-[999] left-0 right-0 bg-white border-t border-gray-200 shadow-md max-h-96 overflow-y-auto"
               >
                 {filteredProducts.length > 0 ? (
                   <ul className="py-1">
                     {filteredProducts.slice(0, 8).map((product) => (
                       <li 
                         key={product.id} 
-                        className="px-4 py-2 hover:bg-gray-50 active:bg-gray-100 cursor-pointer transition-colors"
+                        className="px-4 py-2 hover:bg-gray-50 active:bg-gray-100 z-40 cursor-pointer transition-colors"
                         onClick={() => handleSelectProduct(product)}
                       >
                         <div className="flex items-center space-x-3">
                           <div className="h-10 w-10 flex-shrink-0 rounded bg-gray-100 overflow-hidden">
                             {product.image ? (
                               <Image 
+                                width={40}
+                                height={40}
                                 src={product.image} 
                                 alt={product.name}
                                 className="w-full h-full object-cover"

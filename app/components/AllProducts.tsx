@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { Product } from '../types/product';
-import { X, Filter} from 'lucide-react';
+import { X, Filter, ArrowUp, ArrowDown } from 'lucide-react';
 
 interface AllProductsProps {
   products: Product[];
@@ -14,9 +14,11 @@ const AllProducts: React.FC<AllProductsProps> = ({ products }) => {
   const [filteredProducts, setFilteredProducts] = useState<Product[]>(products);
   const [showCategoriesMobile, setShowCategoriesMobile] = useState(false);
   const [showDesktopCategories] = useState(true);
+  const [sortMethod, setSortMethod] = useState<string>('');
   const sidebarRef = useRef<HTMLDivElement>(null);
   
-  // Extract unique categories from all products
+  // Lấy danh sách danh mục duy nhất từ tất cả sản phẩm
+  // Sử dụng Set để loại bỏ các danh mục trùng lặp
   const uniqueCategories = Array.from(
     new Set(
       products.flatMap(product => 
@@ -25,20 +27,41 @@ const AllProducts: React.FC<AllProductsProps> = ({ products }) => {
     )
   ).sort();
 
-  // Filter products when selected categories change
+  // Lọc và sắp xếp sản phẩm
   useEffect(() => {
-    if (selectedCategories.length === 0) {
-      setFilteredProducts(products);
-    } else {
-      const filtered = products.filter(product => {
+    let filtered = [...products];
+    
+    // Lọc theo danh mục
+    if (selectedCategories.length > 0) {
+      filtered = filtered.filter(product => {
         const productCategories = product.category.split(', ').map(cat => cat.trim());
         return selectedCategories.some(cat => productCategories.includes(cat));
       });
-      setFilteredProducts(filtered);
     }
-  }, [selectedCategories, products]);
+    
+    // Sắp xếp theo phương thức đã chọn
+    if (sortMethod === 'price-asc') {
+      filtered.sort((a, b) => {
+        const priceA = a.discount ? a.price * (1 - a.discount / 100) : a.price;
+        const priceB = b.discount ? b.price * (1 - b.discount / 100) : b.price;
+        return priceA - priceB;
+      });
+    } else if (sortMethod === 'price-desc') {
+      filtered.sort((a, b) => {
+        const priceA = a.discount ? a.price * (1 - a.discount / 100) : a.price;
+        const priceB = b.discount ? b.price * (1 - b.discount / 100) : b.price;
+        return priceB - priceA;
+      });
+    } else if (sortMethod === 'name-asc') {
+      filtered.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (sortMethod === 'name-desc') {
+      filtered.sort((a, b) => b.name.localeCompare(a.name));
+    }
+    
+    setFilteredProducts(filtered);
+  }, [selectedCategories, products, sortMethod]);
 
-  // Handle click outside to close mobile sidebar
+  // Xử lý sự kiện click bên ngoài sidebar để đóng
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (sidebarRef.current && !sidebarRef.current.contains(event.target as Node) && showCategoriesMobile) {
@@ -129,6 +152,75 @@ const AllProducts: React.FC<AllProductsProps> = ({ products }) => {
             </button>
           </div>
           
+          {/* Sort Options for Mobile */}
+          <div className="p-4 border-b">
+            <h3 className="text-sm font-medium text-gray-700 mb-2">Sắp xếp theo</h3>
+            <div className="space-y-2">
+              <div className="flex flex-col space-y-1">
+                <div className="flex items-center space-x-2">
+                  <span className="text-sm text-gray-700">Giá:</span>
+                  <button
+                    onClick={() => setSortMethod('price-asc')}
+                    className={`flex items-center px-2 py-1 rounded text-xs ${
+                      sortMethod === 'price-asc' 
+                        ? 'bg-blue-100 text-blue-700 font-medium' 
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    }`}
+                  >
+                    <ArrowUp className="h-3 w-3 mr-1" />
+                    Thấp đến cao
+                  </button>
+                  <button
+                    onClick={() => setSortMethod('price-desc')}
+                    className={`flex items-center px-2 py-1 rounded text-xs ${
+                      sortMethod === 'price-desc' 
+                        ? 'bg-blue-100 text-blue-700 font-medium' 
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    }`}
+                  >
+                    <ArrowDown className="h-3 w-3 mr-1" />
+                    Cao đến thấp
+                  </button>
+                </div>
+                
+                <div className="flex items-center space-x-2">
+                  <span className="text-sm text-gray-700">Tên:</span>
+                  <button
+                    onClick={() => setSortMethod('name-asc')}
+                    className={`flex items-center px-2 py-1 rounded text-xs ${
+                      sortMethod === 'name-asc' 
+                        ? 'bg-blue-100 text-blue-700 font-medium' 
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    }`}
+                  >
+                    <ArrowUp className="h-3 w-3 mr-1" />
+                    A đến Z
+                  </button>
+                  <button
+                    onClick={() => setSortMethod('name-desc')}
+                    className={`flex items-center px-2 py-1 rounded text-xs ${
+                      sortMethod === 'name-desc' 
+                        ? 'bg-blue-100 text-blue-700 font-medium' 
+                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                    }`}
+                  >
+                    <ArrowDown className="h-3 w-3 mr-1" />
+                    Z đến A
+                  </button>
+                </div>
+              </div>
+              
+              {sortMethod && (
+                <button
+                  onClick={() => setSortMethod('')}
+                  className="text-xs text-pink-600 hover:text-pink-800"
+                >
+                  Xóa sắp xếp
+                </button>
+              )}
+            </div>
+          </div>
+          
           {/* Selected Categories */}
           {selectedCategories.length > 0 && (
             <div className="p-4 border-b">
@@ -194,6 +286,77 @@ const AllProducts: React.FC<AllProductsProps> = ({ products }) => {
 
         {showDesktopCategories && (
           <div className="bg-white border rounded-lg shadow-sm overflow-hidden h-[calc(100vh-2rem)] sticky top-4">
+            {/* Sort Options for Desktop */}
+            <div className="p-4 border-b bg-gradient-to-r from-purple-50 to-blue-50">
+              <h2 className="font-bold text-gray-800 mb-2">Sắp xếp theo</h2>
+              <div className="space-y-3">
+                <div>
+                  <span className="text-sm font-medium text-gray-700 block mb-1">Giá:</span>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => setSortMethod('price-asc')}
+                      className={`flex items-center px-2 py-1 rounded text-xs flex-1 justify-center ${
+                        sortMethod === 'price-asc' 
+                          ? 'bg-blue-100 text-blue-700 font-medium border border-blue-200' 
+                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200'
+                      }`}
+                    >
+                      <ArrowUp className="h-3 w-3 mr-1" />
+                      Thấp đến cao
+                    </button>
+                    <button
+                      onClick={() => setSortMethod('price-desc')}
+                      className={`flex items-center px-2 py-1 rounded text-xs flex-1 justify-center ${
+                        sortMethod === 'price-desc' 
+                          ? 'bg-blue-100 text-blue-700 font-medium border border-blue-200' 
+                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200'
+                      }`}
+                    >
+                      <ArrowDown className="h-3 w-3 mr-1" />
+                      Cao đến thấp
+                    </button>
+                  </div>
+                </div>
+                
+                <div>
+                  <span className="text-sm font-medium text-gray-700 block mb-1">Tên:</span>
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => setSortMethod('name-asc')}
+                      className={`flex items-center px-2 py-1 rounded text-xs flex-1 justify-center ${
+                        sortMethod === 'name-asc' 
+                          ? 'bg-blue-100 text-blue-700 font-medium border border-blue-200' 
+                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200'
+                      }`}
+                    >
+                      <ArrowUp className="h-3 w-3 mr-1" />
+                      A đến Z
+                    </button>
+                    <button
+                      onClick={() => setSortMethod('name-desc')}
+                      className={`flex items-center px-2 py-1 rounded text-xs flex-1 justify-center ${
+                        sortMethod === 'name-desc' 
+                          ? 'bg-blue-100 text-blue-700 font-medium border border-blue-200' 
+                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200'
+                      }`}
+                    >
+                      <ArrowDown className="h-3 w-3 mr-1" />
+                      Z đến A
+                    </button>
+                  </div>
+                </div>
+                
+                {sortMethod && (
+                  <button
+                    onClick={() => setSortMethod('')}
+                    className="text-xs text-pink-600 hover:text-pink-800 block"
+                  >
+                    Xóa sắp xếp
+                  </button>
+                )}
+              </div>
+            </div>
+            
             <div className="p-4 border-b bg-gradient-to-r from-blue-50 to-pink-50">
               <h2 className="font-bold text-gray-800 mb-1">Lọc theo danh mục</h2>
               <p className="text-xs text-gray-500">
@@ -229,7 +392,7 @@ const AllProducts: React.FC<AllProductsProps> = ({ products }) => {
               )}
             </div>
 
-            <div className="overflow-y-auto h-[calc(100%-5rem)]">
+            <div className="overflow-y-auto h-[calc(100%-12rem)]">
               <div className="p-2">
                 {uniqueCategories.map(category => (
                   <button
@@ -257,11 +420,23 @@ const AllProducts: React.FC<AllProductsProps> = ({ products }) => {
           <p className="text-sm text-gray-500">
             Hiển thị {filteredProducts.length} / {products.length} sản phẩm
           </p>
-          {selectedCategories.length > 0 && (
-            <p className="text-sm text-blue-600">
-              Đang lọc: {selectedCategories.join(', ')}
-            </p>
-          )}
+          <div className="flex flex-wrap gap-2 items-center">
+            {sortMethod && (
+              <span className="text-xs bg-purple-100 text-purple-700 px-2 py-0.5 rounded-full">
+                Sắp xếp: {
+                  sortMethod === 'price-asc' ? 'Giá thấp đến cao' :
+                  sortMethod === 'price-desc' ? 'Giá cao đến thấp' :
+                  sortMethod === 'name-asc' ? 'Tên A-Z' :
+                  sortMethod === 'name-desc' ? 'Tên Z-A' : ''
+                }
+              </span>
+            )}
+            {selectedCategories.length > 0 && (
+              <span className="text-xs text-blue-600">
+                Đang lọc: {selectedCategories.join(', ')}
+              </span>
+            )}
+          </div>
         </div>
 
         {/* Products Grid */}
