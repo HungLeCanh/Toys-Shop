@@ -26,6 +26,14 @@ const Home: React.FC<HomeProps> = ({ products, handleTabChange }) => {
     setDisplayProducts(sorted.slice(0, 4));
   }, [products]);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [currentSlide]);
+
+
   const carouselItems = [
     {
       url: "/theme4.webp",
@@ -58,12 +66,7 @@ const Home: React.FC<HomeProps> = ({ products, handleTabChange }) => {
     setCurrentSlide((prev) => (prev === 0 ? carouselItems.length - 1 : prev - 1));
   };
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      nextSlide();
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [currentSlide]);
+
 
   return (
     <div className="flex flex-col w-full px-4 sm:px-6 md:px-8">

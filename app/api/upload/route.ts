@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import { v2 as cloudinary } from "cloudinary";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/app/lib/auth";
 
 cloudinary.config({
   secure: true,
@@ -7,6 +9,10 @@ cloudinary.config({
 
 // Upload ảnh
 export async function POST(req: Request) {
+  const session = await getServerSession(authOptions);
+  if (!session || session.user.role !== "admin") {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
   const formData = await req.formData();
   const file = formData.get("file") as File;
 
@@ -45,6 +51,10 @@ export async function POST(req: Request) {
 
 // Xoá ảnh
 export async function DELETE(req: Request) {
+  const session = await getServerSession(authOptions);
+  if (!session || session.user.role !== "admin") {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
   const { searchParams } = new URL(req.url);
   const imageUrl = searchParams.get("url");
 

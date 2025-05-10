@@ -206,7 +206,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ products, title }) => {
               </div>
               
               {/* Hide description on small screens to save space */}
-              <p className="hidden sm:block text-xs sm:text-sm text-gray-600 mb-2 sm:mb-3 line-clamp-2 flex-grow">
+              <p className="hidden sm:hidden text-xs sm:text-sm text-gray-600 mb-2 sm:mb-3 line-clamp-2 flex-grow">
                 {product.description}
               </p>
               
