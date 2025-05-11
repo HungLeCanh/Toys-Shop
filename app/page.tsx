@@ -163,10 +163,10 @@ export default function Page() {
   };
 
   return (
-    <div className="min-h-screen  flex flex-col bg-yellow-50">
+    <div className="min-h-screen flex flex-col bg-yellow-50">
       {/* Header */}
       <header
-        className={`bg-blue-100 fixed top-0 left-0 w-full z-40 shadow-md h-[110px] md:h-[80px] transition-transform duration-300 ${
+        className={`bg-blue-100 flex items-center fixed top-0 left-0 w-full z-40 shadow-md h-[110px] md:h-[80px] transition-transform duration-300 ${
           showHeader ? "translate-y-0" : "-translate-y-full"
         }`}
       >
@@ -183,7 +183,7 @@ export default function Page() {
                 value={searchTerm}
                 onChange={handleSearch}
                 placeholder="Tìm kiếm sản phẩm..."
-                className="w-full pl-10 pr-10 py-2 rounded-full border border-gray-300 focus:outline-none bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
+                className="w-full text-black pl-10 pr-10 py-2 rounded-full border border-gray-300 focus:outline-none bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
               />
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
               {searchTerm && (
@@ -315,7 +315,7 @@ export default function Page() {
                     value={searchTerm}
                     onChange={handleSearch}
                     placeholder="Tìm kiếm sản phẩm..."
-                    className="w-full pl-8 pr-8 py-2 rounded-full border border-gray-300 focus:outline-none bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm transition-all"
+                    className="w-full text-black pl-8 pr-8 py-2 rounded-full border border-gray-300 focus:outline-none bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm transition-all"
                   />
                   <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 text-gray-400" size={16} />
                   {searchTerm && (
@@ -433,7 +433,7 @@ export default function Page() {
       </header>
 
       {/* Main Content */}
-      <main className="flex-grow container mx-auto max-w-7xl px-1 py-0 md:py-6 mt-[120px] md:mt-[80px]">
+      <main className="flex-grow container mx-auto px-1 py-0 md:py-6 mt-[120px] md:mt-[80px]">
         {loading ? (
           <div className="flex flex-col justify-center items-center h-64">
             <div className="animate-spin rounded-full h-12 w-12 md:h-16 md:w-16 border-t-4 border-b-4 border-blue-500"></div>
@@ -448,7 +448,8 @@ export default function Page() {
               <p className="font-medium text-sm md:text-base">{error}</p>
             </div>
           </div>
-        ) : filteredProducts.length === 0 ? (
+        ) : 
+        filteredProducts.length === 0 ? (
           <div className="bg-yellow-50 border-l-4 border-yellow-400 p-3 md:p-4 rounded shadow-sm">
             <div className="flex items-center">
               <svg className="h-5 w-5 md:h-6 md:w-6 mr-2 text-yellow-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">

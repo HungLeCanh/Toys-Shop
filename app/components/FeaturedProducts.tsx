@@ -62,7 +62,7 @@ const FeaturedProducts: React.FC<FeaturedProductsProps> = ({ products }) => {
 
 
   return (
-    <div className=" flex flex-col gap-4 p-2 sm:p-4 ">
+    <div className=" flex flex-col gap-4 px-4">
       {/* Banner Section - Stacked vertically on mobile, side by side on desktop */}
       <div className="flex flex-col md:flex-row gap-4 bg-white rounded-lg shadow-md overflow-hidden">
         {/* Slider Image & Info - Full width on mobile */}

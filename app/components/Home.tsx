@@ -50,7 +50,7 @@ const Home: React.FC<HomeProps> = ({ products, handleTabChange }) => {
       bgColor: "bg-green-100",
     },
     {
-      url: "/theme4.webp",
+      url: "/theme6.jpg",
       title: "Freeship nội thành",
       description: "Miễn phí giao hàng cho mọi đơn hàng từ 300k",
       buttonText: "Xem ngay",
@@ -70,99 +70,77 @@ const Home: React.FC<HomeProps> = ({ products, handleTabChange }) => {
 
   return (
     <div className="flex flex-col w-full px-4 sm:px-6 md:px-8">
-      {/* Hero Carousel */}
-      <div className="relative w-full h-64 sm:h-80 md:h-96 overflow-hidden rounded-lg shadow-lg mb-8 sm:mb-12">
-        <div
-          className="flex transition-transform duration-500 ease-in-out h-full"
-          style={{ transform: `translateX(-${currentSlide * 100}%)` }}
-        >
-          {carouselItems.map((item, index) => (
-            <div
-              key={index}
-              className={`flex-shrink-0 w-full h-full ${item.bgColor} flex relative`}
-            >
-              {/* Full width image with gradient overlay on mobile */}
-              <div className="absolute inset-0 w-full h-full">
-                <Image
-                  fill 
-                  src={item.url}
-                  alt="Toy showcase" 
-                  className="object-cover md:object-contain md:object-left z-0"
-                />
-                {/* Gradient overlay for mobile - visible only on small screens */}
-                <div className="absolute inset-0 bg-gradient-to-t from-purple-900/70 to-transparent md:hidden"></div>
-              </div>
-
-              {/* Desktop layout - row based, hidden on mobile */}
-              <div className="hidden md:flex md:flex-row md:w-full md:h-full md:items-center md:justify-between md:relative">
-                {/* Image container for desktop - takes half width */}
-                <div className="md:w-1/2 md:h-full md:flex md:items-start md:justify-start md:relative">
-                  {/* Image is handled by the full width background on desktop */}
-                </div>
-                
-                {/* Text content for desktop - right side */}
-                <div className="md:w-1/2 md:text-left md:p-4 md:relative md:z-10">
-                  <h2 className="md:text-4xl font-bold text-purple-800 md:mb-3">
-                    {item.title}
-                  </h2>
-                  <p className="md:text-lg text-gray-700 md:mb-6">
-                    {item.description}
-                  </p>
-                  <button className="z-10 bg-pink-500 hover:bg-pink-600 text-white md:px-8 md:py-3 rounded-full font-semibold transition-all shadow-md hover:shadow-lg cursor-pointer md:text-base"
-                          onClick={() => {
-                            handleTabChange(Tab.Featured);
-                          }}>
-                    {item.buttonText}
-                  </button>
-                </div>
-              </div>
-
-              {/* Mobile layout - overlay text on image, hidden on desktop */}
-              <div className="absolute inset-0 flex flex-col items-center justify-end p-4 pb-12 text-center md:hidden">
-                <h2 className="text-2xl sm:text-3xl font-bold text-white mb-2 sm:mb-3">
-                  {item.title}
-                </h2>
-                <p className="text-sm sm:text-base text-white mb-3 sm:mb-6">
-                  {item.description}
-                </p>
-                <button className="z-10 bg-pink-500 hover:bg-pink-600 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-full font-semibold transition-all shadow-md hover:shadow-lg cursor-pointer text-sm sm:text-base"
-                        onClick={() => {
-                          handleTabChange(Tab.Featured);
-                        }}>
-                  {item.buttonText}
-                </button>
-              </div>
+    {/* Hero Carousel */}
+    <div className="relative w-full h-64 sm:h-80 md:h-140 overflow-hidden rounded-lg shadow-lg mb-8 sm:mb-12">
+      <div
+        className="flex transition-transform duration-500 ease-in-out h-full"
+        style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+      >
+        {carouselItems.map((item, index) => (
+          <div
+            key={index}
+            className={`flex-shrink-0 w-full h-full ${item.bgColor} flex relative`}
+          >
+            {/* Full width image with gradient overlay for both mobile and desktop */}
+            <div className="absolute inset-0 w-full h-full">
+              <Image
+                fill 
+                src={item.url}
+                alt="Toy showcase" 
+                className="object-cover z-0"
+              />
+              {/* Gradient overlay for both mobile and desktop */}
+              <div className="absolute inset-0 bg-gradient-to-t from-blue-900/70 to-transparent"></div>
             </div>
-          ))}
-        </div>
 
-        {/* Carousel controls */}
-        <button
-          onClick={prevSlide}
-          className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-white/70 hover:bg-white p-1 sm:p-2 rounded-full shadow-md z-20"
-        >
-          <ChevronLeft className="text-gray-800 w-4 h-4 sm:w-5 sm:h-5" />
-        </button>
-        <button
-          onClick={nextSlide}
-          className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-white/70 hover:bg-white p-1 sm:p-2 rounded-full shadow-md z-20"
-        >
-          <ChevronRight className="text-gray-800 w-4 h-4 sm:w-5 sm:h-5" />
-        </button>
-
-        {/* Dots indicators */}
-        <div className="absolute bottom-2 sm:bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 z-20">
-          {carouselItems.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentSlide(index)}
-              className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full ${
-                index === currentSlide ? "bg-pink-500" : "bg-white/70"
-              }`}
-            />
-          ))}
-        </div>
+            {/* Text content overlay for both mobile and desktop */}
+            <div className="absolute inset-0 flex flex-col items-center justify-end p-4 pb-12 text-center">
+              <h2 className="text-2xl sm:text-3xl md:text-6xl font-bold text-white mb-2 sm:mb-3">
+                {item.title}
+              </h2>
+              <p className="text-sm sm:text-base md:text-lg text-white mb-3 sm:mb-6">
+                {item.description}
+              </p>
+              <button 
+                className="z-10 bg-pink-500 hover:bg-pink-600 text-white px-4 sm:px-6 md:px-8 py-2 sm:py-3 rounded-full font-semibold transition-all shadow-md hover:shadow-lg cursor-pointer text-sm sm:text-base"
+                onClick={() => {
+                  handleTabChange(Tab.Featured);
+                }}
+              >
+                {item.buttonText}
+              </button>
+            </div>
+          </div>
+        ))}
       </div>
+
+      {/* Carousel controls */}
+      <button
+        onClick={prevSlide}
+        className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-white/70 hover:bg-white p-1 sm:p-2 rounded-full shadow-md z-20"
+      >
+        <ChevronLeft className="text-gray-800 w-4 h-4 sm:w-5 sm:h-5" />
+      </button>
+      <button
+        onClick={nextSlide}
+        className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-white/70 hover:bg-white p-1 sm:p-2 rounded-full shadow-md z-20"
+      >
+        <ChevronRight className="text-gray-800 w-4 h-4 sm:w-5 sm:h-5" />
+      </button>
+
+      {/* Dots indicators */}
+      <div className="absolute bottom-2 sm:bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 z-20">
+        {carouselItems.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentSlide(index)}
+            className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full ${
+              index === currentSlide ? "bg-pink-500" : "bg-white/70"
+            }`}
+          />
+        ))}
+      </div>
+    </div>
 
       {/* Featured Products Section */}
       <div className="w-full px-4 py-8">
@@ -205,7 +183,7 @@ const Home: React.FC<HomeProps> = ({ products, handleTabChange }) => {
               </div>
             </div>
             
-            <div className="p-4 flex flex-col flex-grow">
+            <div className="p-4 flex flex-col flex-grow bg-blue-100">
               <h3 className="text-lg text-black font-semibold mb-2 line-clamp-2 h-14">{product.name}</h3>
               <p className="text-gray-600 mb-4 line-clamp-2 h-12">{product.description}</p>
               
@@ -226,14 +204,14 @@ const Home: React.FC<HomeProps> = ({ products, handleTabChange }) => {
                     </span>
                   )}
                 </div>
-                <button
-                  className="w-full bg-cyan-600 text-white py-2 rounded-full hover:bg-blue-700 transition"
-                  onClick={() => {
-                    handleTabChange(Tab.All);
-                  }}
-                >
-                  Xem thêm
-                </button>
+                  <button
+                    className="w-full border border-blue-700 text-blue-700 bg-white py-2 rounded-full hover:bg-blue-500 hover:text-white transition"
+                    onClick={() => {
+                      handleTabChange(Tab.All);
+                    }}
+                  >
+                    Xem thêm
+                  </button>
               </div>
             </div>
           </div>
