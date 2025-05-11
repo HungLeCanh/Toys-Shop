@@ -5,8 +5,9 @@ import FeaturedProducts from './components/FeaturedProducts';
 import AllProducts from './components/AllProducts';
 import Home from './components/Home';
 import { Product } from './types/product';
-import { Search, X, MessageCircle } from 'lucide-react';
+import { Search, X} from 'lucide-react';
 import Image from 'next/image';
+import ContactButton from './components/ContactButton';
 
 enum Tab {
   Home = 'home',
@@ -116,12 +117,14 @@ export default function Page() {
     // THông tin cửa hàng ở đây
     const shopName = process.env.NEXT_PUBLIC_SHOP_NAME;
     const facebookUrl = process.env.NEXT_PUBLIC_FACEBOOK_LINK;
+    const tel = process.env.NEXT_PUBLIC_TEL;
     if (!facebookUrl || !shopName) {
       console.log("Chưa nhập địa chỉ ở .env kìa anh ơi")
       return <p>Lỗi không có thông tin</p>
     }
     const shopNameUrl = facebookUrl.split("/").filter(Boolean).pop();
     const messengerLink = `https://m.me/${shopNameUrl}`;
+    const zaloLink = `https://zalo.me/${tel}`;
 
   
 
@@ -475,17 +478,14 @@ export default function Page() {
       </main>
 
       {/* Messenger button */}
-      <button 
-        className="fixed bottom-6 left-4 md:bottom-10 md:left-10 z-50 
-                  bg-blue-600 hover:bg-blue-700 text-white 
-                  p-2 md:p-3 rounded-full shadow-lg 
-                  transition-all duration-300 ease-in-out cursor-pointer"
-        onClick={() => window.open(messengerLink, '_blank')}
-        aria-label="Messenger"
-        title="Liên hệ Messenger cửa hàng"
-      >
-        <MessageCircle size={24} className="md:size-8" />
-      </button>
+      <div>
+        {/* Các phần tử khác của component cha */}
+        
+        <ContactButton
+          messengerLink={messengerLink}
+          zaloLink={zaloLink}
+        />
+      </div>
 
       {/* Footer */}
       <footer className="bg-blue-100 border-t border-gray-200 mt-auto">
