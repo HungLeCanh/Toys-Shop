@@ -131,7 +131,7 @@ const AllProducts: React.FC<AllProductsProps> = ({ products }) => {
 
       {/* Mobile Categories Sidebar - Slide from left */}
       <div 
-        className={`fixed md:hidden inset-0 bg-black bg-opacity-50 z-20 transition-opacity duration-300 ${
+        className={`fixed md:hidden inset-0 z-50 transition-opacity duration-300 ${
           showCategoriesMobile ? 'opacity-100' : 'opacity-0 pointer-events-none'
         }`}
       >
