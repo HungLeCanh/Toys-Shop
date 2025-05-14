@@ -14,9 +14,9 @@ interface ContactButtonProps {
 const ContactButton: React.FC<ContactButtonProps> = ({
   messengerLink,
   zaloLink,
-  messages = ["Cửa hàng 24/24", "Liên hệ chúng tôi qua zalo", "Cần hỗ trợ?"],
-  messageInterval = 10000, // 10 giây
-  messageDuration = 5000, // 5 giây
+  messages = ["Cửa hàng 24/7", "Liên hệ qua zalo", "Cần hỗ trợ?"],
+  messageInterval = 5000, // 5 giây
+  messageDuration = 3000, // 5 giây
 }) => {
   const [open, setOpen] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
@@ -68,11 +68,11 @@ const ContactButton: React.FC<ContactButtonProps> = ({
     >
       {/* Tin nhắn mời chào - luôn nằm bên phải của nút */}
       {showMessage && !open && (
-        <div className="absolute bottom-0 left-16 md:left-20 mb-1 w-40 md:w-48">
-          <div className="bg-white text-blue-600 text-sm md:text-base p-2 rounded-lg shadow-md relative">
+        <div className="absolute z-20 bottom-0 left-16 md:left-20 w-40 md:w-48">
+          <div className="bg-white text-sm md:text-base p-4 rounded-lg shadow-xl relative border-2 border-blue-500">
             {messages[currentMessage]}
             {/* Mũi tên trỏ sang trái */}
-            <div className="absolute top-1/2 -left-2 w-4 h-4 bg-white transform -translate-y-1/2 rotate-45"></div>
+            <div className="absolute z-10 top-1/2 -left-2 w-4 h-4 bg-white transform -translate-y-1/2 rotate-45 border-l-2 border-b-2 border-blue-500"></div>
           </div>
         </div>
       )}

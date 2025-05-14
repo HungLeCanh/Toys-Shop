@@ -166,7 +166,7 @@ export default function Page() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-yellow-50">
+    <div className="min-h-screen flex flex-col bg-white">
       {/* Header */}
       <header
         className={`bg-blue-100 flex items-center fixed top-0 left-0 w-full z-40 shadow-md h-[110px] md:h-[80px] transition-transform duration-300 ${

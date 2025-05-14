@@ -158,7 +158,7 @@ const Home: React.FC<HomeProps> = ({ products, handleTabChange }) => {
       
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {displayProducts.map((product, index) => (
-          <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col h-full">
+          <div key={index} className="bg-white border rounded-lg shadow-md overflow-hidden flex flex-col h-full">
             {/* Image container with padding to create space for rounded frame */}
             <div className="p-3">
               {/* Rounded image container with fixed aspect ratio */}
@@ -204,14 +204,14 @@ const Home: React.FC<HomeProps> = ({ products, handleTabChange }) => {
                     </span>
                   )}
                 </div>
-                  <button
-                    className="w-full border border-blue-700 text-blue-700 bg-white py-2 rounded-full hover:bg-blue-500 hover:text-white transition"
-                    onClick={() => {
-                      handleTabChange(Tab.All);
-                    }}
-                  >
-                    Xem thêm
-                  </button>
+                <button
+                  className="w-full border border-blue-700 text-blue-700 bg-white py-2 rounded-full hover:text-white transition-shadow duration-500 shadow-inner hover:shadow-[inset_350px_0_0_0_rgb(59,130,246)]"
+                  onClick={() => {
+                    handleTabChange(Tab.All);
+                  }}
+                >
+                  Xem thêm
+                </button>
               </div>
             </div>
           </div>
@@ -236,7 +236,7 @@ const Home: React.FC<HomeProps> = ({ products, handleTabChange }) => {
             <div className="absolute inset-0 bg-gradient-to-t from-pink-900/70 to-transparent flex items-end p-4 sm:p-6">
               <div>
                 <h3 className="text-white text-lg sm:text-xl font-bold mb-2">Đồ chơi giáo dục</h3>
-                <button className="bg-white text-pink-700 px-3 sm:px-4 py-1 sm:py-2 rounded-full font-medium text-xs sm:text-sm"
+                <button className="bg-white text-pink-700 px-3 sm:px-4 py-1 sm:py-2 rounded-full font-medium text-xs sm:text-sm cursor-pointer transition-shadow duration-500 shadow-inner hover:shadow-[inset_350px_0_0_0_rgb(59,130,246)] hover:text-white"
                 onClick={() => {
                   handleTabChange(Tab.All);
                 }}>
@@ -255,7 +255,7 @@ const Home: React.FC<HomeProps> = ({ products, handleTabChange }) => {
             <div className="absolute inset-0 bg-gradient-to-t from-purple-900/70 to-transparent flex items-end p-4 sm:p-6">
               <div>
                 <h3 className="text-white text-lg sm:text-xl font-bold mb-2">Đồ chơi vận động</h3>
-                <button className="bg-white text-purple-700 px-3 sm:px-4 py-1 sm:py-2 rounded-full font-medium text-xs sm:text-sm"
+                <button className="bg-white text-purple-700 px-3 sm:px-4 py-1 sm:py-2 rounded-full font-medium text-xs sm:text-sm cursor-pointer transition-shadow duration-500 shadow-inner hover:shadow-[inset_350px_0_0_0_rgb(59,130,246)] hover:text-white"
                 onClick={() => {
                   handleTabChange(Tab.All);
                 }}>
@@ -274,7 +274,7 @@ const Home: React.FC<HomeProps> = ({ products, handleTabChange }) => {
             <div className="absolute inset-0 bg-gradient-to-t from-green-900/70 to-transparent flex items-end p-4 sm:p-6">
               <div>
                 <h3 className="text-white text-lg sm:text-xl font-bold mb-2">Đồ chơi sáng tạo</h3>
-                <button className="bg-white text-green-700 px-3 sm:px-4 py-1 sm:py-2 rounded-full font-medium text-xs sm:text-sm"
+                <button className="bg-white text-green-700 px-3 sm:px-4 py-1 sm:py-2 rounded-full font-medium text-xs sm:text-sm cursor-pointer transition-shadow duration-500 shadow-inner hover:shadow-[inset_350px_0_0_0_rgb(59,130,246)] hover:text-white"
                 onClick={() => {
                   handleTabChange(Tab.All);
                 }}>
