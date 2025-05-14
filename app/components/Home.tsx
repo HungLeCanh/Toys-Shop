@@ -147,13 +147,14 @@ const Home: React.FC<HomeProps> = ({ products, handleTabChange }) => {
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-2xl sm:text-3xl text-black font-bold">Sản phẩm nổi bật</h2>
         <button 
-          className="text-blue-600 hover:underline"
+          className="px-4 py-2 text-blue-600 border border-blue-600 rounded-full hover:bg-blue-600 hover:text-white transition duration-300"
           onClick={() => {
             handleTabChange(Tab.All);
           }}
         >
           Xem tất cả
         </button>
+
       </div>
       
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -205,12 +206,12 @@ const Home: React.FC<HomeProps> = ({ products, handleTabChange }) => {
                   )}
                 </div>
                 <button
-                  className="w-full border border-blue-700 text-blue-700 bg-white py-2 rounded-full hover:text-white transition-shadow duration-500 shadow-inner hover:shadow-[inset_350px_0_0_0_rgb(59,130,246)]"
+                  className="w-full align-middle border border-blue-700 text-blue-700 bg-white py-2 rounded-full hover:text-white transition-shadow duration-500 shadow-inner hover:shadow-[inset_350px_0_0_0_rgb(59,130,246)]"
                   onClick={() => {
                     handleTabChange(Tab.All);
                   }}
                 >
-                  Xem thêm
+                  Xem thêm <span className="text-xl">&rarr;</span>
                 </button>
               </div>
             </div>
